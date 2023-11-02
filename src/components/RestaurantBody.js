@@ -8,6 +8,10 @@ const[listOfRestaurants,setListOfRestaurants]=useState([]);
 const [filteredRestaurant,setFilteredRestaurant]=useState([]);
 const[searchText,setSearchText]=useState("")
 
+console.log(listOfRestaurants);
+
+
+
 
 useEffect(()=>{
 console.log("useEffect called");    
@@ -51,6 +55,7 @@ setFilteredRestaurant( json?.data?.cards[2]?.card?.card?.gridElements?.infoWithS
         <div className='grid grid-cols-4 gap-5 place-items-center'>
 {
     filteredRestaurant.map((restaurants)=><li key={restaurants.info.id} className="list-none">
+    
       <Link to={"/restaurants/"+restaurants.info.id}>  <RestaurantCard listObj={restaurants}/></Link>
         </li>)
 }

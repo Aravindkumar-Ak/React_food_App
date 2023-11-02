@@ -17,5 +17,20 @@ const RestaurantCard = (props) => {
     </div>
   )
 }
+//Higher-order component
+//it take an input of Restaurantcard and add some features like promote label and return it .
+// export const withPromotedCard=(RestaurantCard)=>{
+
+// return()=>{
+//   return(
+//     <>
+//     <label>Promoted</label>
+//     <RestaurantCard/>
+//     </>
+//   )
+// }
+
+
+// }
 
 export default RestaurantCard

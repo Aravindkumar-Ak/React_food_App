@@ -10,7 +10,7 @@ const[menuList,setMenuList]=useState(null)
         const fetchMenu=async()=>{
             const data=await fetch(API_URL+id)
             const json=await data.json()
-            console.log(json);
+            // console.log(json);
             setMenuList(json?.data)
         }
 return  menuList;
