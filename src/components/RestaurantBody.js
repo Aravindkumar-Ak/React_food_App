@@ -3,10 +3,7 @@ import RestaurantCard from './RestaurantCard';
 import Shimmer from './Shimmer';
 import { Link } from 'react-router-dom';
 import CarouselData from './CarouselData';
-import {FaChevronCircleLeft,FaChevronCircleRight} from "react-icons/fa"
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+import CarouserBanner from './CarouserBanner';
 
 
 const RestaurantBody = () => {
@@ -14,16 +11,8 @@ const[listOfRestaurants,setListOfRestaurants]=useState([]);
 const [filteredRestaurant,setFilteredRestaurant]=useState([]);
 const[carouselRest,setCarouselRest]=useState([])
 const[searchText,setSearchText]=useState("")
-const [sliderRef, setSliderRef] = useState(null)
+const [banner,setBanner]=useState([])
 
-const settings = {
-  dots: true,
-  autoplay: true,
-  autoplaySpeed: 4000,
-  arrow: true,
-  slidesToShow: 9,
-  slidesToScroll: 1,
-}
 useEffect(()=>{
 fetchData()
 },[])
@@ -34,6 +23,7 @@ const fetchData=async()=>{
     console.log(json.data);
     setListOfRestaurants( json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants )
 setFilteredRestaurant( json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants )
+setBanner(json?.data?.cards[0]?.card?.card?.imageGridCards?.info)
 setCarouselRest(json?.data?.cards[1]?.card?.card?.imageGridCards?.info)
 
 }
@@ -42,10 +32,11 @@ setCarouselRest(json?.data?.cards[1]?.card?.card?.imageGridCards?.info)
 {if(listOfRestaurants?.length===0)return <Shimmer/>}
   return (
     <div className='p-4 m-4' >
-        <div className='flex justify-start items-center py-4 ml-8'>
-        <div>
-          <input type="text" value={searchText} placeholder='Enter here to search' className='px-2  py-1 rounded-md border-2 border-black' onChange={(e)=>{setSearchText(e.target.value)}}/>
-          <button className='bg-transparent hover:bg-black hover:text-white text-black border-2 border-slate-400 font-normal py-1 px-5 rounded mx-2'
+      <CarouserBanner banner={banner}/>
+      <div className='flex flex-col items-center py-8 ml-8 md:flex-row  md:items-center'>
+        <div className='flex items-center my-2'>
+          <input type="text" value={searchText} placeholder='Enter here to search' className='rounded-md border-2 border-black md:px-2 md:py-1' onChange={(e)=>{setSearchText(e.target.value)}}/>
+          <button className='bg-red-500 hover:bg-red-700 hover:text-white text-black border-2 border-slate-400 font-normal text-sm  px-2 ml-2 rounded md:px-4 md:py-1 md:text-lg md:rounded-lg'
           onClick={()=>{
             const searchtxt=listOfRestaurants.filter((search)=>search.info.name.toLowerCase().includes(searchText.toLowerCase()))
             setFilteredRestaurant(searchtxt)
@@ -56,7 +47,7 @@ setCarouselRest(json?.data?.cards[1]?.card?.card?.imageGridCards?.info)
           >search</button>
         </div>
         <div>
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-6 rounded mx-4'
+        <button className='bg-blue-500 hover:bg-blue-700 text-white px-2 py-1 mt-2 text-sm font-normal rounded whitespace-nowrap px-2 md:px-2 md:ml-2 md:py-1 md:text-lg md:mt-0'
         onClick={()=>{
             const filter=listOfRestaurants.filter((items)=>items.info.avgRating>4)
                 setFilteredRestaurant(filter)
@@ -67,36 +58,14 @@ setCarouselRest(json?.data?.cards[1]?.card?.card?.imageGridCards?.info)
         </div>
          
         </div>
- <div className='px-8'>
- <h1 className='font-bold text-xl my-4'>What's on your mind?</h1>
  
- <div className='controls flex justify-between'>
-        <button onClick={sliderRef?.slickPrev} >
-          {console.log(sliderRef)}
-          <FaChevronCircleLeft />
-        </button>
-        <button onClick={sliderRef?.slickNext}>
-          <FaChevronCircleRight />
-        </button>
-      </div>
-      {/* <Slider ref={sliderRef} {...sliderSettings}> */}
-<ul className=' my-4 overflow-hidden relative'>
-<Slider ref={setSliderRef} {...settings}>
-{
-  
-  carouselRest?.map((data,index)=><li key={index} ><CarouselData carousel={data}/></li>)
-}
-</Slider>
-</ul>
-{/* </Slider> */}
- </div>
+<CarouselData carouselData={carouselRest}/>
+<hr/>
+<h1 className='font-bold text-lg my-4 px-4 md:text-3xl'>Top Restaurants </h1>
 
-
-
-
-        <div className='grid grid-cols-4 gap-5 place-items-center'>
-          
-{filteredRestaurant.length===0?<p className='font-bold text-center top-56 absolute text-3xl'>couldn't found the Result</p>:
+        <div className='grid grid-cols-1 gap-5 place-items-center md:grid-cols-5 '>
+      
+{filteredRestaurant?.length===0?<p className='font-bold text-center top-56 absolute text-3xl'>couldn't found the Result</p>:
     filteredRestaurant.map((restaurants)=><li key={restaurants.info.id} className="list-none">
     
       <Link to={"/restaurants/"+restaurants.info.id}>  <RestaurantCard listObj={restaurants}/></Link>

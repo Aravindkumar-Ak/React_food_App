@@ -1,30 +1,70 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Logo from "./../Assets/food.png"
+import { FaHamburger } from 'react-icons/fa'
+import { IoIosClose } from "react-icons/io";
 const Header = () => {
-        const[login,setLogin]=useState("login")
-        const[show,setShow]=useState(false)
+ const[login,setLogin]=useState("login")
+   const[isOpen,setIsOpen]  =useState(false)
+
+const toggleMenu=()=>{
+        setIsOpen(!isOpen)
+}
+
 
 const cartItems=useSelector((store)=>store.cart.items)
 
   return (
-   <nav className= { `${show && 'bg-zinc-400 '} bg-green-200 h-[75px] px-[50px] py-1 sticky top-0 shadow-lg z-50 `}>
-    <div className='flex items-center justify-between max-w-6xl mx-auto mt-3'>
+   <nav className= 'bg-yellow-200 w-screen fixed top-0 z-50 h-20 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ' > 
+    <div className=' flex flex-row px-4 pt-4 md:flex-row justify-between items-center md:pt-0 md:px-4 md:mx-auto md:max-w-7xl '>
+    {/* flex items-center justify-between max-w-6xl mx-auto mt-3 */}
         <div>
-<Link to="/"><img src={Logo} alt="brand-logo" className='w-[50px]'/></Link>
+<Link to="/"><img src={Logo} alt="brand-logo" className='w-[40px] md:w-[65px]'/></Link>
         </div>
+       
         <div>
-<ul className='flex items-center text-lg font-semibold'>
+        <button onClick={toggleMenu}>
+                        {!isOpen ?
+                <FaHamburger className='ml-4 text-lg md:hidden'/>:
+                <IoIosClose className='text-lg md:hidden'/>
+                }
+                </button>
+
+
+                {/* medium screens and above */}
+
+<ul className='md:flex md:flex-row md:items-center  md:text-lg md:static hidden'>
    <Link to="/contact"> <li className='mr-4'>Contact us</li> </Link>
    <Link to="/about">    <li className='mr-4'>About us</li></Link>
    <Link to="/cart"><li>Cart({cartItems.length})</li></Link>
-    <button className='bg-blue-500 hover:bg-blue-700 text-white font-normal py-1 px-4 rounded mx-4'
+    
+    <button className= 'bg-blue-500 hover:bg-blue-700 text-white w-1/5 font-normal py-1 px-4 rounded md:mx-2 mx-0'
     onClick={()=>{login==="login"?setLogin("logout"):setLogin("login") }}
     >{login}</button>
 </ul>
+ 
+                  {/* mobile-view */}
+
+{isOpen &&
+<ul className='md:hidden flex flex-col gap-4 absolute left-0 top-16  text-sm bg-yellow-200 px-2  py-1 w-full'>
+   <Link to="/contact"> <li className='mr-4'>Contact us</li> </Link>
+   <Link to="/about">    <li className='mr-4'>About us</li></Link>
+   <Link to="/cart"><li>Cart({cartItems.length})</li></Link>
+    
+    <button className= 'bg-blue-500 hover:bg-blue-700 text-white w-1/5 font-normal py-1 px-4 rounded md:mx-2 mx-0'
+    onClick={()=>{login==="login"?setLogin("logout"):setLogin("login") }}
+    >{login}</button>
+</ul>
+}
+
         </div>
+
     </div>
+   
+               
+    
+   
    </nav>
   )
 }

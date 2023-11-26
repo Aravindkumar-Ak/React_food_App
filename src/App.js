@@ -11,6 +11,7 @@ import UserContext from './utilis/UserContext';
 import { Provider } from 'react-redux';
 import appStore from './utilis/appStore';
 import Cart from './Pages/Cart';
+import Footer from './components/Footer';
 
 
 
@@ -23,6 +24,7 @@ const App = () => {
     <div>
       <Header/>
       <Outlet/>
+      <Footer/>
     </div>
     </Provider>
   )
