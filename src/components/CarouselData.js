@@ -1,12 +1,14 @@
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import { CDN_URL } from '../utilis/constant'
 import {FaChevronCircleLeft,FaChevronCircleRight} from "react-icons/fa"
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import ThemeContext from '../utilis/ThemeContext'
 
 const CarouselData = ({carouselData}) => {
   const [sliderRef, setSliderRef] = useState(null)
+  const {theme}=useContext(ThemeContext)
   const settings = {
     dots: true,
     autoplay: true,
@@ -23,7 +25,7 @@ const CarouselData = ({carouselData}) => {
  
  <div className='controls flex justify-between'>
         <button onClick={sliderRef?.slickPrev} >
-          {console.log(sliderRef)}
+          {/* {console.log(sliderRef)} */}
           <FaChevronCircleLeft />
         </button>
         <button onClick={sliderRef?.slickNext}>
@@ -31,11 +33,11 @@ const CarouselData = ({carouselData}) => {
         </button>
       </div>
   
-<ul className=' my-4 overflow-hidden relative'>
+<ul className=' my-4 overflow-hidden relative '>
 <Slider ref={setSliderRef} {...settings}>
 {
   
-  carouselData?.map((data)=><li key={data.id} ><img src={CDN_URL+data.imageId} alt='food-Items'/></li>)
+  carouselData?.map((data)=><li key={data.id} ><img src={CDN_URL+data.imageId} alt='food-Items' /></li>)
 }
 </Slider>
 </ul>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import  ReactDOM  from 'react-dom/client';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
  import Header from './components/Header';
@@ -7,26 +7,30 @@ import Contact from './Pages/Contact';
 import About from './Pages/About';
 import Error from './Pages/Error';
 import RestaurantMenu from './components/RestaurantMenu';
-import UserContext from './utilis/UserContext';
 import { Provider } from 'react-redux';
 import appStore from './utilis/appStore';
 import Cart from './Pages/Cart';
 import Footer from './components/Footer';
+import ThemeContext from './utilis/ThemeContext';
 
 
 
 const App = () => {
 
-
-
+const[theme,setTheme]=useState("light")
+const toggleTheme=()=>{
+  setTheme(theme==="light"?"dark":"light")
+}
   return (
+    <ThemeContext.Provider value={{theme,toggleTheme}}>
   <Provider store={appStore}>
-    <div>
+    <div className={`${theme==="dark"&& "bg-slate-800 text-white"}`}>
       <Header/>
       <Outlet/>
-      <Footer/>
+      
     </div>
     </Provider>
+    </ThemeContext.Provider>
   )
 }
 

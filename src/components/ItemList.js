@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addItem } from '../utilis/cartSlice';
 import { CDN_URL } from '../utilis/constant';
@@ -11,8 +11,10 @@ const dispatch=useDispatch()
   const handleAddItems=(item)=>{
    toast.success("Item Added Successfully!")
     dispatch(addItem(item))
+   
   }
   const handleRemoveCart=()=>{
+    toast.error("Item Removed Successfully!")
     dispatch(removeItem())
     }
 

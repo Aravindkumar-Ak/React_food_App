@@ -29,7 +29,7 @@ setCarouselRest(json?.data?.cards[1]?.card?.card?.imageGridCards?.info)
 }
 
 
-{if(listOfRestaurants?.length===0)return <Shimmer/>}
+{if(listOfRestaurants.length===0)return <Shimmer/>}
   return (
     <div className='p-4 m-4' >
       <CarouserBanner banner={banner}/>
@@ -65,7 +65,7 @@ setCarouselRest(json?.data?.cards[1]?.card?.card?.imageGridCards?.info)
 
         <div className='grid grid-cols-1 gap-5 place-items-center md:grid-cols-5 '>
       
-{filteredRestaurant?.length===0?<p className='font-bold text-center top-56 absolute text-3xl'>couldn't found the Result</p>:
+{filteredRestaurant.length===0?<p className='font-bold text-center top-56 absolute text-3xl'>couldn't found the Result</p>:
     filteredRestaurant.map((restaurants)=><li key={restaurants.info.id} className="list-none">
     
       <Link to={"/restaurants/"+restaurants.info.id}>  <RestaurantCard listObj={restaurants}/></Link>

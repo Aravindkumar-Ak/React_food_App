@@ -7,7 +7,7 @@ const RestaurantCard = (props) => {
   return (
     <div className='flex flex-col justify-center w-[270px] h-[350px] p-3 mt-3 shadow-xl rounded-md hover:scale-95 hover:transition ease-in duration-150 cursor-pointer'>
         <div className='flex justify-center'>
-        <img src={CDN_URL+cloudinaryImageId} alt="food-image" className='w-[230px] h-[200px] rounded-lg'/>
+        <img src={CDN_URL+cloudinaryImageId} alt="food-image" className='w-11/12 h-52 rounded-lg'/>
         </div>
         <div className='mt-2 p-2'>
 <h2>{name}</h2>
