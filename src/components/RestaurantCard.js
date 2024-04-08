@@ -12,7 +12,7 @@ const RestaurantCard = (props) => {
         <div className='mt-2 p-2'>
 <h2>{name}</h2>
 <p>{cuisines.slice(0,3).join(",")}</p>
-<p>Rating {avgRating}</p>
+<p>Rating <span className=' bg-red-500 border-0 rounded-sm inline-block w-[47px] text-center text-sm text-white'>⭐{avgRating}</span></p>
 </div>
     </div>
   )

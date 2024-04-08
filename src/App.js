@@ -10,8 +10,7 @@ import RestaurantMenu from './components/RestaurantMenu';
 import { Provider } from 'react-redux';
 import appStore from './utilis/appStore';
 import Cart from './Pages/Cart';
-import Footer from './components/Footer';
-import ThemeContext from './utilis/ThemeContext';
+
 
 
 
@@ -22,15 +21,14 @@ const toggleTheme=()=>{
   setTheme(theme==="light"?"dark":"light")
 }
   return (
-    <ThemeContext.Provider value={{theme,toggleTheme}}>
+ 
   <Provider store={appStore}>
-    <div className={`${theme==="dark"&& "bg-slate-800 text-white"}`}>
+    <div >
       <Header/>
       <Outlet/>
-      
-    </div>
+      </div>
     </Provider>
-    </ThemeContext.Provider>
+  
   )
 }
 

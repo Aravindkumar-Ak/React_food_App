@@ -5,7 +5,6 @@ import Logo from "./../Assets/food.png"
 import { FaHamburger } from 'react-icons/fa'
 import { IoIosClose } from "react-icons/io";
 import Typewriter from 'typewriter-effect';
-import ThemeContext from '../utilis/ThemeContext'
 import ReactSwitch from 'react-switch'
 import { FaShoppingCart } from 'react-icons/fa'
 import { FaRegSun } from 'react-icons/fa'
@@ -14,7 +13,7 @@ const Header = () => {
  const[login,setLogin]=useState("login")
    const[isOpen,setIsOpen]  =useState(false)
 
-   const {theme,toggleTheme}=useContext(ThemeContext);
+ 
 
 const toggleMenu=()=>{
         setIsOpen(!isOpen)
@@ -24,7 +23,7 @@ const toggleMenu=()=>{
 const cartItems=useSelector((store)=>store.cart.items)
 
   return (
-   <nav className= 'bg-yellow-200 w-screen fixed top-0 z-50 h-20 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ' > 
+   <nav className= 'bg-red-800 w-screen fixed top-0 z-50 h-20 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ' > 
     <div className=' flex flex-row px-4 pt-4 md:flex-row justify-between items-center md:pt-0 md:px-4 md:mx-auto md:max-w-7xl '>
     {/* flex items-center justify-between max-w-6xl mx-auto mt-3 */}
         <div>
@@ -59,10 +58,11 @@ const cartItems=useSelector((store)=>store.cart.items)
    <Link to="/cart" className="md:relative"><li><FaShoppingCart />
    <p className='md:absolute md:-top-2 md:-right-1 md:text-xs md:text-center md:text-white md:bg-blue-600 md:rounded-lg md:w-3 '>{cartItems.length}</p></li></Link>
     
-    <button className= 'bg-blue-500 hover:bg-blue-700 text-white w-1/5 font-normal py-1 px-4 rounded md:mx-2 mx-0'
+    <button className= 'bg-blue-500 hover:bg-blue-700 text-white w-2/5 font-normal py-1 px-4 rounded md:mx-2 mx-0'
     onClick={()=>{login==="login"?setLogin("logout"):setLogin("login") }}
     >{login}</button>
-<ReactSwitch onChange={toggleTheme} checked={theme==="light"} />{theme==="light" ?<FaRegSun className='text-orange-500 mx-2'/>:<FaRegMoon className='text-black mx-2'/>}
+{/* <ReactSwitch  onChange={toggleTheme} checked={theme==="light"} uncheckedIcon={"🌙"} checkedIcon={"🔆"}/> */}
+
 
   
 </ul>

@@ -10,7 +10,7 @@ const CarouserBanner = ({banner}) => {
     const [sliderRef, setSliderRef] = useState(null)
     const {theme}=useContext(ThemeContext)
     const settings = {
-        dots: true,
+        dots: false,
         autoplay: true,
         autoplaySpeed: 4000,
         arrow: true,

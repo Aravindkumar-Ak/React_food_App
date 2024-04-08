@@ -21,7 +21,7 @@ const dispatch=useDispatch()
   return (
    
     <div>
-       <ToastContainer theme="colored" autoClose={2000}/>
+       <ToastContainer theme="colored" autoClose={1000}/>
         {items.map((itemCards)=>(<div key={itemCards.card.info.id} className="flex justify-between p-4 border-b-2 ">
        
           <div className='w-9/12'>

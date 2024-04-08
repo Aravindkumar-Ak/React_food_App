@@ -18,21 +18,22 @@ fetchData()
 },[])
 
 const fetchData=async()=>{
-    const data=await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.0826802&lng=80.2707184&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+    const data=await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.89960&lng=80.22090&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
     const json=await data.json()
     console.log(json.data);
-    setListOfRestaurants( json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants )
-setFilteredRestaurant( json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants )
-setBanner(json?.data?.cards[0]?.card?.card?.imageGridCards?.info)
-setCarouselRest(json?.data?.cards[1]?.card?.card?.imageGridCards?.info)
+    setListOfRestaurants( json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants )
+setFilteredRestaurant( json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants )
+// setBanner(json?.data?.cards[0]?.card?.card?.imageGridCards?.info)
+// setCarouselRest(json?.data?.cards[1]?.card?.card?.imageGridCards?.info)
 
+setCarouselRest(json?.data?.cards[0]?.card?.card?.imageGridCards?.info)
 }
 
 
-{if(listOfRestaurants.length===0)return <Shimmer/>}
+{if(listOfRestaurants?.length===0)return <Shimmer/>}
   return (
-    <div className='p-4 m-4' >
-      <CarouserBanner banner={banner}/>
+    <div className='p-4  mt-12' >
+      {/* <CarouserBanner banner={banner}/> */}
       <div className='flex flex-col items-center py-8 ml-8 md:flex-row  md:items-center'>
         <div className='flex items-center my-2'>
           <input type="text" value={searchText} placeholder='Enter here to search' className='rounded-md border-2 border-black md:px-2 md:py-1' onChange={(e)=>{setSearchText(e.target.value)}}/>
@@ -58,15 +59,16 @@ setCarouselRest(json?.data?.cards[1]?.card?.card?.imageGridCards?.info)
         </div>
          
         </div>
- 
+ <div className='w-full '>
 <CarouselData carouselData={carouselRest}/>
+</div>
 <hr/>
 <h1 className='font-bold text-lg my-4 px-4 md:text-3xl'>Top Restaurants </h1>
 
         <div className='grid grid-cols-1 gap-5 place-items-center md:grid-cols-5 '>
       
-{filteredRestaurant.length===0?<p className='font-bold text-center top-56 absolute text-3xl'>couldn't found the Result</p>:
-    filteredRestaurant.map((restaurants)=><li key={restaurants.info.id} className="list-none">
+{filteredRestaurant?.length===0?<p className='font-bold text-center top-[75%] absolute text-3xl text-gray-500'>couldn't found the Result</p>:
+    filteredRestaurant?.map((restaurants)=><li key={restaurants.info.id} className="list-none">
     
       <Link to={"/restaurants/"+restaurants.info.id}>  <RestaurantCard listObj={restaurants}/></Link>
         </li>) 
